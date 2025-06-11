@@ -1,0 +1,32 @@
+# This file defines the structure of this project and how it is deployed
+# to production using Databricks Asset Bundles.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: dbt-workshop
+  uuid: 27522967-4a9c-4605-be28-7b0fcfec3b0a
+
+include:
+  - resources/*.yml
+
+# Deployment targets.
+# The default schema, catalog, etc. for dbt are defined in dbt_profiles/profiles.yml
+targets:
+  dev:
+    # The default target uses 'mode: development' to create a development copy.
+    # - Deployed resources get prefixed with '[dev my_user_name]'
+    # - Any job schedules and triggers are paused by default.
+    # See also https://docs.databricks.com/dev-tools/bundles/deployment-modes.html.
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-673939630363416.16.azuredatabricks.net
+
+  prod:
+    mode: production
+    workspace:
+      host: https://adb-673939630363416.16.azuredatabricks.net
+      # We explicitly deploy to /Workspace/Users/olivier.hurni@gmail.com to make sure we only have a single copy.
+      root_path: /Workspace/Users/olivier.hurni@gmail.com/.bundle/${bundle.name}/${bundle.target}
+    permissions:
+      - user_name: olivier.hurni@gmail.com
+        level: CAN_MANAGE
