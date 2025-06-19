@@ -1,6 +1,7 @@
 {{ config(materialized='table') }}
 
 SELECT 
+    {{ dbt_utils.generate_surrogate_key(['p_partkey']) }} as part_key,
     p_partkey as part_id,
     p_name as part_name,
     p_mfgr as manufacturer,

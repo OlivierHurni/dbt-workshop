@@ -1,8 +1,12 @@
 {{ config(materialized='table') }}
 
 SELECT 
+    {{ dbt_utils.generate_surrogate_key(['l_orderkey', 'l_linenumber']) }} as lineitem_key,
+    {{ dbt_utils.generate_surrogate_key(['l_orderkey']) }} as order_key,
     l_orderkey as order_id,
+    {{ dbt_utils.generate_surrogate_key(['l_partkey']) }} as part_key,
     l_partkey as part_id,
+    {{ dbt_utils.generate_surrogate_key(['l_suppkey']) }} as supplier_key,
     l_suppkey as supplier_id,
     l_linenumber as line_number,
     l_quantity as quantity,
