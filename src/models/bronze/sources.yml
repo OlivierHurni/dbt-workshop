@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: 'Raw TPC-H data'
+    tables:
+      - name: customer
+      - name: orders
+      - name: lineitem
+      - name: part
+      - name: partsupp
+      - name: supplier
+      - name: nation
+      - name: region

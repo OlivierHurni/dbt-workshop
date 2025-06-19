@@ -17,3 +17,8 @@ logs/
 
 # Workshop
 .creds
+CLAUDE.md
+workshop/instructor
+profiles.yml
+.DS_Store
+.user.yml

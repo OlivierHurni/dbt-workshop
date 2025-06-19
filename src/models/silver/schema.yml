@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: customers
+    description: 'Cleansed customer data'
+    columns:
+      - name: customer_id
+        description: "The unique identifier for a customer."
+        tests:
+          - unique
+          - not_null
+  - name: orders
+    description: 'Cleansed orders data'
+  - name: lineitems
+    description: 'Cleansed line item data'
+  - name: parts
+    description: 'Cleansed parts data'
+  - name: suppliers
+    description: 'Cleansed supplier data'
+  - name: nations
+    description: 'Cleansed nation data'
+  - name: regions
+    description: 'Cleansed region data'
