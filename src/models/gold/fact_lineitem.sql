@@ -15,9 +15,9 @@ SELECT
     o.customer_key,
     l.part_key,
     l.supplier_key,
-    l.quantity,
 
     -- Measures
+    l.quantity,
     l.extended_price,
     l.discount,
     l.tax,
