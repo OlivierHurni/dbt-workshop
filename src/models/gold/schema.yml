@@ -42,3 +42,24 @@ models:
         tests:
           - unique
           - not_null
+  
+  - name: fact_lineitem
+    description: 'Line item fact table'
+    columns:
+      - name: lineitem_key
+        description: 'Surrogate key for line item'
+        tests:
+          - unique
+          - not_null
+      - name: part_key
+        description: 'Foreign key to parts'
+        tests:
+          - not_null
+      - name: supplier_key
+        description: 'Foreign key to suppliers'
+        tests:
+          - not_null
+      - name: customer_key
+        description: 'Foreign key to customers'
+        tests:
+          - not_null
