@@ -3,7 +3,7 @@
 {{
     config(
       target_schema='ek_silver_snapshots',
-      unique_key='supplier_id',
+      unique_key='supplier_key',
       strategy='check',
       check_cols='all'
     )
