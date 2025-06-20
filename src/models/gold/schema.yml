@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: 'Customer dimension with geography'
+    columns:
+      - name: customer_key
+        description: 'Surrogate key for customer'
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: 'Natural key for customer'
+        tests:
+          - unique
+          - not_null
+  
+  - name: dim_supplier
+    description: 'Supplier dimension with geography'
+    columns:
+      - name: supplier_key
+        description: 'Surrogate key for supplier'
+        tests:
+          - unique
+          - not_null
+      - name: supplier_id
+        description: 'Natural key for supplier'
+        tests:
+          - unique
+          - not_null
+  
+  - name: dim_part
+    description: 'Part dimension'
+    columns:
+      - name: part_key
+        description: 'Surrogate key for part'
+        tests:
+          - unique
+          - not_null
+      - name: part_id
+        description: 'Natural key for part'
+        tests:
+          - unique
+          - not_null

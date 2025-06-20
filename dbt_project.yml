@@ -33,3 +33,7 @@ models:
     silver:
       schema: silver
       +materialized: table
+
+seeds:
+  dbt_workshop:
+    schema: gold
