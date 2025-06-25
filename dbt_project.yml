@@ -33,3 +33,7 @@ models:
     silver:
       schema: silver
       +materialized: table
+snapshots:
+  dbt_workshop:
+    silver:
+      schema: silver
