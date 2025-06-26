@@ -13,8 +13,9 @@ dbt-workshop:
     dev:
       type: databricks
       method: http
-      catalog: silver
-      schema: "default"
+      catalog: dbt_workshop
+      schema: default
+      threads: 4
 
       http_path: /sql/1.0/warehouses/42d4ebf47e760187
 
@@ -27,8 +28,9 @@ dbt-workshop:
     prod:
       type: databricks
       method: http
-      catalog: silver
+      catalog: dbt_workshop
       schema: default
+      threads: 4
 
       http_path: /sql/1.0/warehouses/42d4ebf47e760187
 

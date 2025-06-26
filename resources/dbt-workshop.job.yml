@@ -12,9 +12,31 @@ resources:
       #email_notifications:
       #  on_failure:
       #    - your_email@example.com
+ 
+      job_clusters:
+        - job_cluster_key: dbt_CLI
+          new_cluster:
+            spark_version: 15.4.x-scala2.12
+            spark_conf:
+              spark.master: local[*, 4]
+              spark.databricks.cluster.profile: singleNode
+            azure_attributes:
+              first_on_demand: 1
+              availability: ON_DEMAND_AZURE
+              spot_bid_max_price: -1
+            node_type_id: Standard_D4s_v3
+            custom_tags:
+              ResourceClass: SingleNode
+              activity: daily-load
+            spark_env_vars:
+              PYSPARK_PYTHON: /databricks/python3/bin/python3
+            enable_elastic_disk: true
+            data_security_mode: SINGLE_USER            
+            num_workers: 0
 
       tasks:
         - task_key: dbt
+          job_cluster_key: dbt_CLI 
 
           dbt_task:
             project_directory: ../
@@ -24,19 +46,18 @@ resources:
             # The dbt commands to run (see also the dev/prod profiles in dbt_profiles/profiles.yml)
             - 'dbt deps --target=${bundle.target}'
             - 'dbt seed --target=${bundle.target}'
-            - 'dbt run --target=${bundle.target}'
+            - 'dbt build --target=${bundle.target}'
+          max_retries: 1
+          min_retry_interval_millis: 60000
 
           libraries:
           - pypi:
               package: dbt-databricks>=1.8.0,<2.0.0
-
-          new_cluster:
-            spark_version: 15.4.x-scala2.12
-            node_type_id: Standard_D3_v2
-            data_security_mode: SINGLE_USER
-            num_workers: 0
-            spark_conf:
-                spark.master: "local[*, 4]"
-                spark.databricks.cluster.profile: singleNode
-            custom_tags:
-              ResourceClass: SingleNode
+         
+      permissions:
+        - group_name: dbx-admins
+          level: CAN_MANAGE
+ 
+      parameters:
+        - name: env
+          default: ${bundle.target}

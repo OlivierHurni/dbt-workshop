@@ -20,6 +20,6 @@ package-lock.yml
 .creds
 CLAUDE.md
 workshop/instructor
-profiles.yml
+# profiles.yml
 .DS_Store
 .user.yml
